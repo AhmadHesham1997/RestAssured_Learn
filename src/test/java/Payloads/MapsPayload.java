@@ -16,4 +16,12 @@ public class MapsPayload {
                 "  \"language\": \"French-IN\"\n" +
                 "}";
     }
+    // We created this method to get the extracted value from the previous POST request and pass it in the body of the PUT request to update the place, we use method with parameters to pass the value
+    public static String updatePlaceRequestBody(String placeId, String newAddress){
+        return "{\n" +
+                "\"place_id\":\""+placeId+"\",\n" + // we concatenate the placeID in the body of the request
+                "\"address\":\""+newAddress+"\",\n" + // we concatenate the new address in the body of the request
+                "\"key\":\"qaclick123\"\n" +
+                "}";
+    }
 }
