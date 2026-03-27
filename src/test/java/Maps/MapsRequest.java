@@ -3,8 +3,8 @@ package Maps;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import org.testng.annotations.Test;
-import static Payloads.MapsPayload.addPlaceRequestBody;
-import static Payloads.MapsPayload.updatePlaceRequestBody;
+
+import static Payloads.MapsPayload.*;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.testng.Assert.assertEquals;
@@ -62,6 +62,16 @@ public class MapsRequest {
 
                 //Another way of assertion using TestNG assertEquals
                assertEquals(actualAddress, newAddress, "Address update failed"); // we assert that the actual address is equal to the new address and we can add a message if the assertion failed
+
+            // Delete place using POST request to validate that the place is deleted
+            given().queryParam("key", "qaclick123")
+                    .header("Content-Type", "application/json")
+                    .body(deletePlaceRequestBody(placeId)) // We use method with parameter to pass the placeId
+                    .when().post("maps/api/place/delete/json")
+                    .then().assertThat().statusCode(200)
+                    .assertThat().body("status", equalTo("OK")) // We assert on status in the response body
+                    .assertThat().body("status", equalTo("OK"))
+                    .log().all(); // So I can see the response i don't need to extract a certain key because the response body already has only 1 key
 
     }
 }

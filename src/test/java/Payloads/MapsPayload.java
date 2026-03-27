@@ -24,4 +24,11 @@ public class MapsPayload {
                 "\"key\":\"qaclick123\"\n" +
                 "}";
     }
+
+    //We create this method to delte
+    public static String deletePlaceRequestBody(String placeId){
+        return "{\n" +
+                "    \"place_id\": \"" + placeId + "\"\n" + // we pass the placeId in the body of the request to delete the place
+                "}";
+    }
 }
