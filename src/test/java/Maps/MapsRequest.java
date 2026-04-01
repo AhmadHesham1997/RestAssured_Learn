@@ -1,9 +1,9 @@
 package Maps;
 
+import Commons.Utils;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import org.testng.annotations.Test;
-
 import static Payloads.MapsPayload.*;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -29,7 +29,7 @@ public class MapsRequest {
                 // into string and store it in a variable
                 System.out.println(addPlaceResponse);
                 //Extract placeID from response using JsonPath class which help me get a value from response
-               JsonPath js = new JsonPath(addPlaceResponse); // we create an object of json path and pass the response in it
+               JsonPath js = Utils.rawToJson(addPlaceResponse); // we create an object of json path and pass the response in it
                 String placeId = js.getString("place_id"); // we use the getString method to get the value of place_id and store it in a variable
                 System.out.println("PlaceID: " + placeId);
 
